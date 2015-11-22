@@ -121,42 +121,26 @@ display: block;
   
 	// Now add the layer onto the map
 	map.addLayer(layer);
-	omnivore.csv('sample_expeditions.csv').addTo(map);
+	marker_layer = omnivore.csv('sample_expeditions.csv').on('ready', function(layer) {
+		this.eachLayer(function(marker) {
+			var expedition_title = marker.feature.properties.name;
+			var location_name = marker.feature.properties.location;
+			var people_involved = marker.feature.properties.people;
+			var description = marker.feature.properties.details; 
+			var year = marker.feature.properties.start;
 
-	// INFO BOX
 
-	var info = L.control();
-
-	info.onAdd = function (map) {
-		this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-		this.update();
-		return this._div;
-		};
-
-	info.update = function (props) {
-	    this._div.innerHTML = '<h4><center>Expedition Info</center></h4>' 
+                marker.bindPopup('<strong>Expedition: </strong>'+ expedition_title + '<br> <strong>Historical Note: </strong>'+ description + '<br> <strong> Personnel: </strong>' + people_involved);
+		        });
+		    })
 	
-};
-
-	info.addTo(map);
-
-
-	// POINTS ON DA MAP! 
-
-	// L.marker([40.7806, -73.9747]).addTo(map)
-	//   .bindPopup("<strong>American Museum of Natural History</strong>").openPopup();
-
-
+    	.addTo(map);
 
 
 </script>
 
 
-<div>
-
-</div>
-
-<footer>
+<!-- <footer>
 <ul>
 <li>
 <h5> I am really really really really tired.</h5>
@@ -171,7 +155,7 @@ display: block;
 </li>
 </ul>
 </footer>
-
+ -->
 
 </body>
 
