@@ -24,7 +24,7 @@
 	line-height: 1;
 	padding: 12px;
 	background: rgba(0, 0, 0, 0.95);
-	color: #fff;
+	color: #000000;
 	border-radius: 2px;
 }
 
@@ -49,11 +49,12 @@
 }
 
 .info {
-	width: 300px;
+	width: 25%;
 	height: 500px;
 /*	background-color: #686D73; */
 /*	background-color: #E1E1E1;*/
 	color: #000;
+/*	left: 0;     */
 /*	margin-left: 10px;*/
 /*	padding-left: 10px;*/
 	font-family: sans-serif;
@@ -69,6 +70,36 @@ h4 {
 	font-weight: 400;
 	font-family: sans-serif;
 	font-size: 16pt;
+}
+
+
+
+footer {
+    background-color: #363B47;
+    position: fixed;
+    opacity .9;
+    left: 0;
+    /* margin-left: -10px; */
+    bottom: 0;
+    height: 32%;
+    width: 100%;
+    overflow:hidden;
+}
+
+ h5 {
+color: white;
+font-weight: 400;
+opacity .9;
+font-family: sans-serif;
+font-size: 16pt;
+}
+
+li {
+height: 98%;
+width: 33%;
+float: left;
+position: relative;
+display: block;
 }
 
 </style>
@@ -104,7 +135,8 @@ h4 {
 
 	info.update = function (props) {
 	    this._div.innerHTML = '<h4><center>Expedition Info</center></h4>' 
-	};
+	
+};
 
 	info.addTo(map);
 
@@ -118,4 +150,31 @@ h4 {
 
 
 </script>
+
+
+<div>
+
+</div>
+
+<footer>
+<ul>
+<li>
+<h5> I am really really really really tired.</h5>
+</li>
+
+<li>
+<h5> I am really really really really tired.</h5>
+</li>
+
+<li>
+<h5> I am really really really really tired.</h5>
+</li>
+</ul>
+</footer>
+
+
+</body>
+
+
+
 
