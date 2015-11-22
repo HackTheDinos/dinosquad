@@ -1,91 +1,100 @@
 <head>
 
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
- <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
- <link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
- <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
+	<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+	<script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+	<script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
 
 
-<style>
+	<style>
 
 
-.info {
-	width: 450px;
-	height: 500px;
-/*	background-color: #686D73; */
-/*	background-color: #E1E1E1;*/
-	color: #000;
-/*	left: 0;     */
-/*	margin-left: 10px;*/
-/*	padding-left: 10px;*/
-	font-family: sans-serif;
-	position: relative; 
-	opacity: 0.9;
-    background: rgba(255,255,255,0.9);
-    box-shadow: 0 0 15px rgba(0,0,0,0.3);
-    border-radius: 1px;
+	.info {
+		width: 450px;
+		height: 500px;
+		/*	background-color: #686D73; */
+		/*	background-color: #E1E1E1;*/
+		color: #000;
+		/*	left: 0;     */
+		/*	margin-left: 10px;*/
+		/*	padding-left: 10px;*/
+		font-family: sans-serif;
+		position: relative; 
+		opacity: 0.9;
+		background: rgba(255,255,255,0.9);
+		box-shadow: 0 0 15px rgba(0,0,0,0.3);
+		border-radius: 1px;
 
-}
+	}
 
-h4 {
-	font-weight: 400;
-	font-family: sans-serif;
-	font-size: 16pt;
-}
+	h4 {
+		font-weight: 400;
+		font-family: sans-serif;
+		font-size: 16pt;
+	}
 
 
 
-footer {
-    background-color: #363B47;
-    position: fixed;
-    opacity .9;
-    left: 0;
-    /* margin-left: -10px; */
-    bottom: 0;
-    height: 32%;
-    width: 100%;
-    overflow:hidden;
-}
+	footer {
+		background-color: #363B47;
+		position: fixed;
+		opacity .9;
+		left: 0;
+		/* margin-left: -10px; */
+		bottom: 0;
+		height: 32%;
+		width: 100%;
+		overflow:hidden;
+	}
 
- h5 {
-color: white;
-font-weight: 400;
-opacity .9;
-font-family: sans-serif;
-font-size: 16pt;
-}
+	h5 {
+		color: white;
+		font-weight: 400;
+		opacity .9;
+		font-family: sans-serif;
+		font-size: 16pt;
+	}
 
-li {
-height: 98%;
-width: 33%;
-float: left;
-position: relative;
-display: block;
-}
+	li {
+		height: 98%;
+		width: 33%;
+		float: left;
+		position: relative;
+		display: block;
+	}
 
-p {
-	font-size: 10px;
-	color: #686D73;
-	font-family: sans-serif;
-}
+	p {
+		font-size: 10px;
+		color: #686D73;
+		font-family: sans-serif;
+	}
 
-body { margin:0; padding:0; }
+	body { margin:0; padding:0; }
 
-.description {
-	width: 300px;
-}
+	.description {
+		width: 300px;
+	}
 
-#map { position:absolute; top:0; bottom:0; width:100%; }
+	.pictures {
+		width: 300px;
+		text-align: center;
+	}
 
-</style>
+	.description2 {
+		width: 300px;
+	}
+
+	#map { position:absolute; top:0; bottom:0; width:100%; }
+
+	</style>
 </head>
 
 <body>
 
-<div id="map" style="height: 100%;"></div>
-<div id="info_box"></div>
+	<div id="map" style="height: 100%;"></div>
+	<div id="info_box"></div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 	// The first parameter are the coordinates of the center of the map
 	// The second parameter is the zoom level
 	var map = L.map('map').setView([40.712, -74.006], 3);
@@ -95,9 +104,9 @@ body { margin:0; padding:0; }
 	});
 
 	layer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+		attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 	});
-  
+
 	// Now add the layer onto the map
 	map.addLayer(layer);
 	marker_layer = omnivore.csv('sample_expeditions.csv').on('ready', function(layer) {
@@ -111,37 +120,44 @@ body { margin:0; padding:0; }
 
 				// marker.setIcon(dino_icon);
 
-                marker.bindPopup('<strong>Expedition: </strong>'+ expedition_title + '<br> <strong>Historical Note: </strong>'+ description + '<br> <strong> Personnel: </strong>' + people_involved);
-		        });
-		    })
+				marker.bindPopup('<strong>Expedition: </strong>'+ expedition_title + '<br> <strong>Historical Note: </strong>'+ description + '<br> <strong> Personnel: </strong>' + people_involved);
+			});
+	})
 
-    	.addTo(map);
-
-
-</script>
+	.addTo(map);
 
 
-<<footer>
-<ul>
-<li>
-<div class="description">
-	<h5> Yushe Basin  |  1938</h5>
-	<p>
-		 The primary purpose of this survey expedition is to locate the 1933 fossil with a view to extract the remains for further study. The secondary focus will be to explore the immediate area for more fossil deposits that may have been uncovered in the 1934/35 floods. This expedition also forms part of the Project 138 objectives as outlined above.
-	</p>
-</div>
-</li>
+	</script>
 
-<li>
- <img src="images/Hack the Dinos-01.jpg" alt="Explorers" align="middle" style="height:75%;"> 
-</li>
 
-<li>
-<h5> I am really really really really tired.</h5>
-</li>
-</ul>
-</footer>
- 
+	<footer>
+		<ul>
+			<li>
+				<div class="description">
+					<h5> Yushe Basin  |  1938</h5>
+					<p>
+						The primary purpose of this survey expedition is to locate the 1933 fossil with a view to extract the remains for further study. The secondary focus will be to explore the immediate area for more fossil deposits that may have been uncovered in the 1934/35 floods. This expedition also forms part of the Project 138 objectives as outlined above.
+					</p>
+				</div>
+			</li>
+
+			<li>
+				<div class="pictures">		
+					<img src="images/picture2.png" alt="Explorers" align="middle" style="height:75%;"> 
+				</div>
+			</li>
+
+			<li>
+				<div class="description2">	
+					<h5> Pit Stop #3</h5>
+					<p>
+						The more we learn about these processes the better we will be able to predict future climate change and its consequences. The work north of Lake Eyre continues, but surveying in remote regions around the Kallakoopah and in the centre of the Simpson Desert is extremely difficult with 4WD vehicles.
+					</p>
+				</div>
+			</li>
+		</ul>
+	</footer>
+
 
 </body>
 
