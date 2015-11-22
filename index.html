@@ -7,46 +7,7 @@
 
 
 <style>
-.axis path,
-.axis line {
-	fill: none;
-	stroke: black;
-	shape-rendering: crispEdges;
-}
-.axis text {
-	font-family: sans-serif;
-	font-size: 11px;
-}
 
-.d3-tip {
-	font-family: sans-serif;
-    font-size: 11px;
-	line-height: 1;
-	padding: 12px;
-	background: rgba(0, 0, 0, 0.95);
-	color: #000000;
-	border-radius: 2px;
-}
-
-.d3-tip:after {
-	box-sizing: border-box;
-	display: inline;
-	font-size: 10px;
-	width: 100%;
-	line-height: 1;
-	color: rgba(0, 0, 0, 0.9);
-	content: "\25BC";
-	position: absolute;
-	text-align: center;
-	float: left;
-}
-
-/* Style northward tooltips differently */
-.d3-tip.n:after {
-	margin: -1px 0 0 0;
-	top: 100%;
-	left: 0;
-}
 
 .info {
 	width: 450px;
@@ -102,6 +63,20 @@ position: relative;
 display: block;
 }
 
+p {
+	font-size: 10px;
+	color: #686D73;
+	font-family: sans-serif;
+}
+
+body { margin:0; padding:0; }
+
+.description {
+	width: 300px;
+}
+
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
 </style>
 </head>
 
@@ -115,6 +90,10 @@ display: block;
 	// The second parameter is the zoom level
 	var map = L.map('map').setView([40.712, -74.006], 3);
 
+	var dino_icon = L.icon({
+		iconUrl: 'images/footprint.png'
+	});
+
 	layer = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 	});
@@ -123,27 +102,34 @@ display: block;
 	map.addLayer(layer);
 	marker_layer = omnivore.csv('sample_expeditions.csv').on('ready', function(layer) {
 		this.eachLayer(function(marker) {
+			console.log(marker);
 			var expedition_title = marker.feature.properties.name;
 			var location_name = marker.feature.properties.location;
 			var people_involved = marker.feature.properties.people;
 			var description = marker.feature.properties.details; 
 			var year = marker.feature.properties.start;
 
+				// marker.setIcon(dino_icon);
 
                 marker.bindPopup('<strong>Expedition: </strong>'+ expedition_title + '<br> <strong>Historical Note: </strong>'+ description + '<br> <strong> Personnel: </strong>' + people_involved);
 		        });
 		    })
-	
+
     	.addTo(map);
 
 
 </script>
 
 
-<!-- <footer>
+<<footer>
 <ul>
 <li>
-<h5> I am really really really really tired.</h5>
+<div class="description">
+	<h5> Yushe Basin  |  1938</h5>
+	<p>
+		 The primary purpose of this survey expedition is to locate the 1933 fossil with a view to extract the remains for further study. The secondary focus will be to explore the immediate area for more fossil deposits that may have been uncovered in the 1934/35 floods. This expedition also forms part of the Project 138 objectives as outlined above.
+	</p>
+</div>
 </li>
 
 <li>
@@ -155,7 +141,7 @@ display: block;
 </li>
 </ul>
 </footer>
- -->
+ 
 
 </body>
 
